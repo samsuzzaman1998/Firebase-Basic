@@ -1,3 +1,4 @@
+import GitHubLogIn from "./Pages/GitHubLogIn";
 import GoogleSignIn from "./Pages/GoogleSignIn";
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
         <div className="App">
             <h2>Firebase Authentication</h2>
             <GoogleSignIn />
+            <GitHubLogIn />
         </div>
     );
 }

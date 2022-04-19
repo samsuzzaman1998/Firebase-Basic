@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import FirebaseApp from "../firebase-init";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+} from "firebase/auth";
 
 // creating auth variable
 const auth = getAuth(FirebaseApp);
@@ -21,9 +26,26 @@ const GoogleSignIn = () => {
             })
             .catch((err) => console.log(err));
     };
+
+    const handleGoogleSignOutBtn = () => {
+        signOut(auth)
+            .then(() => {
+                setUserInfo({});
+            })
+            .catch((err) => {
+                setUserInfo({});
+                console.log(err);
+            });
+    };
     return (
         <div>
-            <button onClick={handleGoogleSignInBtn}>sign in with google</button>
+            {userInfo.uid ? (
+                <button onClick={handleGoogleSignOutBtn}>signOut</button>
+            ) : (
+                <button onClick={handleGoogleSignInBtn}>
+                    sign in with google
+                </button>
+            )}
             <div>
                 <h3>Name: {userInfo.displayName}</h3>
                 <p>Email: {userInfo.email}</p>
